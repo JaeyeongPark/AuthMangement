@@ -23,7 +23,7 @@ public class AuthUserResponse {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expireDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date createTime;
+    private Date createDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date updateTime;
+    private Date updateDate;
 }

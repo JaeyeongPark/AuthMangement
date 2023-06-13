@@ -6,6 +6,8 @@ import com.test.fasoo.mapper.AuthUserMapper;
 import com.test.fasoo.vo.AuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,26 +17,47 @@ public class AuthUserService {
     @Autowired
     private AuthUserMapper authUserMapper;
 
+
     //유저 권한 추가
+    @Transactional
     public AuthUserResponse createUserAuth(AuthUserRequest authUserRequest) {
-        authUserMapper.createAuthUser(authUserRequest);
+        /*
+         // 중복된 데이터 삽입 확인
+         boolean isDuplicate = authUserMapper.checkDuplicateDate(authUserRequest);
+         if(isDuplicate){
+            return null;
+         }
+         */
 
-        List<AuthUser> authUserList = authUserMapper.getCreateAuth(authUserRequest.getRequestId());
+        //데이터베이스에 권한 추가
+        int rowsAffected = authUserMapper.createAuthUser(authUserRequest);
 
-        List<String> dataList = new ArrayList<>();
-
-        for (AuthUser authUser : authUserList){
-            dataList.add(authUser.getDataId());
+        if (rowsAffected <= 0){
+            return null;
         }
 
+        //생성된 데이터 조회
+        List<AuthUser> authUserList = authUserMapper.getCreateAuth(authUserRequest.getRequestId());
+
         AuthUserResponse authUserRes = new AuthUserResponse();
-        authUserRes.setAuthTypeId(authUserList.get(0).getAuthTypeId());
-        authUserRes.setRequestId(authUserList.get(0).getRequestId());
-        authUserRes.setDataList(dataList);
-        authUserRes.setBeginDate(authUserList.get(0).getBeginDate());
-        authUserRes.setExpireDate(authUserList.get(0).getExpireDate());
-        authUserRes.setCreateTime(authUserList.get(0).getCreateTime());
-        authUserRes.setUpdateTime(authUserList.get(0).getUpdateTime());
+        if (authUserList != null && !authUserList.isEmpty()){
+            List<String> dataList = new ArrayList<>();
+
+            for (AuthUser authUser : authUserList){
+                System.out.println(authUser);
+                dataList.add(authUser.getDataId());
+            }
+
+
+            authUserRes.setAuthTypeId(authUserList.get(0).getAuthTypeId());
+            authUserRes.setUserId(authUserList.get(0).getUserId());
+            authUserRes.setRequestId(authUserList.get(0).getRequestId());
+            authUserRes.setDataList(dataList);
+            authUserRes.setBeginDate(authUserList.get(0).getBeginDate());
+            authUserRes.setExpireDate(authUserList.get(0).getExpireDate());
+            authUserRes.setCreateDate(authUserList.get(0).getCreateTime());
+            authUserRes.setUpdateDate(authUserList.get(0).getUpdateTime());
+        }
 
         return authUserRes;
     }

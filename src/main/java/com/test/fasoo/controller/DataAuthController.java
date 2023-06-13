@@ -24,7 +24,6 @@ public class DataAuthController {
         AuthUserResponse authUserRes;
         authUserRes = authUserService.createUserAuth(authUserRequest);
 
-
         return authUserRes;
     }
 
