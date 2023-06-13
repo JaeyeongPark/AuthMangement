@@ -10,7 +10,7 @@ import java.util.List;
 public interface AuthUserMapper {
     public int createAuthUser(AuthUserRequest authUser);
     public List<AuthUser> getCreateAuth(String requestId);
-    public AuthUserRequest readAuthUser(String userId);
+    public AuthUser getAuthUser(String userId, String authTypeName, String dataId);
 
     public List<AuthUserRequest> getUserList(String userId);
 

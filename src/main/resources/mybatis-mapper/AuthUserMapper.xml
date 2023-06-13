@@ -18,8 +18,11 @@
     </select>
 
     <!-- 유저 권한 조회 -->
-    <select id="readAuthUser" parameterType="java.lang.String" resultType="com.test.fasoo.vo.AuthUser">
-        SELECT * FROM auth_user WHERE user_id = #{userId};
+    <select id="getAuthUser" parameterType="java.lang.String" resultType="com.test.fasoo.vo.AuthUser">
+        SELECT * FROM auth_user
+        WHERE user_id = #{userId}
+        AND auth_type_id = (SELECT auth_type_id from auth_type where auth_type_name = #{authTypeName})
+        AND data_id = #{dataId};
     </select>
 
     <!-- 관리자가 유저 권한 목록 조회   -->

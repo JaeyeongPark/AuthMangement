@@ -4,6 +4,7 @@ package com.test.fasoo.controller;
 import com.test.fasoo.dto.AuthUserRequest;
 import com.test.fasoo.dto.AuthUserResponse;
 import com.test.fasoo.service.AuthUserService;
+import com.test.fasoo.vo.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,13 +30,12 @@ public class DataAuthController {
 
     //유저 권한 조회
     @GetMapping("")
-    public AuthUserRequest readAuthUser(@RequestHeader String authorization, @RequestParam String authTypeName, String dataId){
-        AuthUserRequest resAuthUser;
+    public AuthUser getAuthUser(@RequestHeader String userId, @RequestParam String authTypeName, String dataId){
+        AuthUser authUser;
 
-
-        resAuthUser = authUserService.readUserAuth(authTypeName);
-
-        return resAuthUser;
+        authUser = authUserService.getAuthUser(userId, authTypeName, dataId);
+        System.out.println(authUser);
+        return authUser;
     }
 
     @GetMapping("/list")
@@ -55,4 +55,5 @@ public class DataAuthController {
 
         return authList;
     }
+
 }

@@ -62,8 +62,8 @@ public class AuthUserService {
         return authUserRes;
     }
     //유저 권한 조회
-    public AuthUserRequest readUserAuth(String userId){
-        return authUserMapper.readAuthUser(userId);
+    public AuthUser getAuthUser(String userId, String authTypeName, String dataId){
+        return authUserMapper.getAuthUser(userId, authTypeName, dataId);
     }
     //권한 목록 조회(관리자)
     public List<AuthUserRequest> getUserList(String userId){

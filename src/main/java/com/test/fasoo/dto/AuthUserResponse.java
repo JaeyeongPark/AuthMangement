@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthUserResponse {
-    private long id;
     private String authTypeId;
     private String userId;
     private String requestId;
