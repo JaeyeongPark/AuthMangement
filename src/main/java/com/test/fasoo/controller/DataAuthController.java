@@ -1,12 +1,12 @@
 package com.test.fasoo.controller;
 
 
-import com.test.fasoo.dto.AuthUser;
+import com.test.fasoo.dto.AuthUserRequest;
+import com.test.fasoo.dto.AuthUserResponse;
 import com.test.fasoo.service.AuthUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,26 +18,30 @@ public class DataAuthController {
 
     //유저 권한 생성
     @PostMapping("")
-    public int createAuthUser(@RequestBody AuthUser authUser){
-//        System.out.println(authUser);
-        return authUserService.createUserAuth(authUser);
+    public AuthUserResponse createAuthUser(@RequestBody AuthUserRequest authUserRequest){
+        //Access Token의 userId를 활용해서 관리자인지 판단하는 코드 추가
+
+        AuthUserResponse authUserRes;
+        authUserRes = authUserService.createUserAuth(authUserRequest);
+
+
+        return authUserRes;
     }
 
     //유저 권한 조회
     @GetMapping("")
-    public AuthUser readAuthUser(@RequestParam String userId){
-        AuthUser resAuthUser;
+    public AuthUserRequest readAuthUser(@RequestHeader String authorization, @RequestParam String authTypeName, String dataId){
+        AuthUserRequest resAuthUser;
 
-        resAuthUser = authUserService.readUserAuth(userId);
 
-//        System.out.println(resAuthUser);
+        resAuthUser = authUserService.readUserAuth(authTypeName);
 
         return resAuthUser;
     }
 
     @GetMapping("/list")
-    public List<AuthUser> getUserList(@RequestParam String userId){
-        List<AuthUser> userList;
+    public List<AuthUserRequest> getUserList(@RequestParam String userId){
+        List<AuthUserRequest> userList;
 
         userList = authUserService.getUserList(userId);
 
@@ -45,8 +49,8 @@ public class DataAuthController {
     }
 
     @GetMapping("/list/me")
-    public List<AuthUser> getAuthList(@RequestParam String userId){
-        List<AuthUser> authList;
+    public List<AuthUserRequest> getAuthList(@RequestParam String userId){
+        List<AuthUserRequest> authList;
 
         authList = authUserService.getAuthList(userId);
 
