@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthUserRequest {
-    private String authTypeId;
+    private String authTypeName;
     private String userId;
     private String requestId;
     private List<String> dataList;

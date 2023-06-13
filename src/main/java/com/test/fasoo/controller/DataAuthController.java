@@ -38,6 +38,16 @@ public class DataAuthController {
         return authUser;
     }
 
+    @PutMapping("")
+    public AuthUserResponse updateAuthUser(@RequestBody AuthUserRequest authUserRequest){
+        AuthUserResponse authUserRes;
+
+        authUserRes = authUserService.updateAuthUser(authUserRequest);
+
+
+        return authUserRes;
+    }
+
     @GetMapping("/list")
     public List<AuthUserRequest> getUserList(@RequestParam String userId){
         List<AuthUserRequest> userList;

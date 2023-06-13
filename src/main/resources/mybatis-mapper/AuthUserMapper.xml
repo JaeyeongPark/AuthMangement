@@ -17,13 +17,32 @@
         SELECT * FROM auth_user WHERE request_id = #{requestId}
     </select>
 
+
     <!-- 유저 권한 조회 -->
     <select id="getAuthUser" parameterType="java.lang.String" resultType="com.test.fasoo.vo.AuthUser">
-        SELECT * FROM auth_user
-        WHERE user_id = #{userId}
-        AND auth_type_id = (SELECT auth_type_id from auth_type where auth_type_name = #{authTypeName})
-        AND data_id = #{dataId};
+        SELECT * FROM auth_user u JOIN auth_type t
+        ON u.auth_type_id = t.id
+        WHERE u.user_id = #{userId}
+        AND t.auth_type_Name = #{authTypeName}
+        AND u.data_id = #{dataId};
     </select>
+
+
+    <!-- 권한 정보 업데이트 -->
+    <update id="updateAuthUser" parameterType="com.test.fasoo.dto.AuthUserRequest">
+        UPDATE auth_user SET
+        <foreach collection="dataList" item="data" separator=",">
+            auth_type_id = #{authTypeId},
+            user_id = #{userId},
+            request_id = #{requestId},
+            data_id = #{data},
+            begin_date = #{beginDate},
+            expire_ate = #{expireDate}
+            WHERE auth_type_id = #{authTypeId}
+            AND user_id = #{userId}
+            AND data_id = #{dataId}
+        </foreach>
+    </update>
 
     <!-- 관리자가 유저 권한 목록 조회   -->
     <select id="getUserList" parameterType="java.lang.String" resultType="hashmap">

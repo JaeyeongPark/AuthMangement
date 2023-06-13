@@ -8,10 +8,12 @@ import java.util.List;
 
 @Mapper
 public interface AuthUserMapper {
-    public int createAuthUser(AuthUserRequest authUser);
+    public int createAuthUser(AuthUserRequest authUserRequest);
     public List<AuthUser> getCreateAuth(String requestId);
     public AuthUser getAuthUser(String userId, String authTypeName, String dataId);
 
+
+    public int updateAuthUser(AuthUserRequest authUserRequest);
     public List<AuthUserRequest> getUserList(String userId);
 
     public List<AuthUserRequest> getAuthList(String userId);
