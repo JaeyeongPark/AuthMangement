@@ -61,6 +61,10 @@
     <!-- 유저가 자신의 권한 목록 조회 -->
     <select id="getAuthList" parameterType="java.lang.String" resultType="com.test.fasoo.vo.AuthUser">
         SELECT * FROM auth_user WHERE user_id = #{userId};
+        <if test="limit != 0">
+        </if>
+        <if test="offset != 0">
+        </if>
     </select>
 
 
