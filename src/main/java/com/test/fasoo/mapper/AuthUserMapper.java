@@ -14,8 +14,8 @@ public interface AuthUserMapper {
     public int updateAuthUser(AuthUserRequest authUserRequest);
 
     public int deleteAuthUser(String userId, String authTypeName, String dataId);
-    public List<AuthUserRequest> getUserList(String userId);
+    public List<AuthUser> getUserList(String userId,String authTypeName, int limit, int offset, int order);
 
-    public List<AuthUserRequest> getAuthList(String userId);
+    public List<AuthUser> getAuthList(String userId, int limit, int offset, int order);
 
 }

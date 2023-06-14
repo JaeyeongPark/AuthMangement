@@ -54,20 +54,22 @@ public class DataAuthController {
         return authUserService.deleteAuthUser(userId, authTypeName, dataId);
     }
 
+    //관리자가 권한을 가지고 있는 유저 목록을 조회
     @GetMapping("/list")
-    public List<AuthUserRequest> getUserList(@RequestParam String userId){
-        List<AuthUserRequest> userList;
+    public List<AuthUser> getUserList(@RequestHeader String userId, @RequestParam(required = false) String authTypeName, int limit, int offset, int order) {
+        List<AuthUser> userList;
 
-        userList = authUserService.getUserList(userId);
+        userList = authUserService.getUserList(userId,authTypeName, limit, offset, order);
 
         return userList;
     }
 
+    //유저가 가지고 있는 권한 목록 조회
     @GetMapping("/list/me")
-    public List<AuthUserRequest> getAuthList(@RequestParam String userId){
-        List<AuthUserRequest> authList;
+    public List<AuthUser> getAuthList(@RequestHeader String userId, @RequestParam(required = false, defaultValue = "0")int limit, @RequestParam(required = false, defaultValue = "0")int offset, @RequestParam(required = false, defaultValue = "0")int order){
+        List<AuthUser> authList;
 
-        authList = authUserService.getAuthList(userId);
+        authList = authUserService.getAuthList(userId, limit, offset, order);
 
         return authList;
     }

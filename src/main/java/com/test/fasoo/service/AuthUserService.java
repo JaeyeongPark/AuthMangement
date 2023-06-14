@@ -4,6 +4,7 @@ import com.test.fasoo.dto.AuthUserRequest;
 import com.test.fasoo.dto.AuthUserResponse;
 import com.test.fasoo.mapper.AuthUserMapper;
 import com.test.fasoo.vo.AuthUser;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +44,7 @@ public class AuthUserService {
             List<String> dataList = new ArrayList<>();
 
             for (AuthUser authUser : authUserList){
-                System.out.println(authUser);
+//                System.out.println(authUser);
                 dataList.add(authUser.getDataId());
             }
 
@@ -81,7 +82,7 @@ public class AuthUserService {
             List<String> dataList = new ArrayList<>();
 
             for (AuthUser authUser : authUserList){
-                System.out.println(authUser);
+//                System.out.println(authUser);
                 dataList.add(authUser.getDataId());
             }
 
@@ -100,18 +101,20 @@ public class AuthUserService {
     }
 
     public int deleteAuthUser(String userId, String authTypeName, String dataId){
-        System.out.println(userId);
-        System.out.println(authTypeName);
-        System.out.println(dataId);
+//        System.out.println(userId);
+//        System.out.println(authTypeName);
+//        System.out.println(dataId);
         return authUserMapper.deleteAuthUser(userId, authTypeName, dataId);
     }
 
     //권한 목록 조회(관리자)
-    public List<AuthUserRequest> getUserList(String userId){
-        return authUserMapper.getUserList(userId);
+    public List<AuthUser> getUserList(String userId,String authTypeName, int limit, int offset, int order){
+
+        return authUserMapper.getUserList(userId,authTypeName, limit, offset, order);
     }
     //권한 목록 조회(유저)
-    public List<AuthUserRequest> getAuthList(String userId){
-        return authUserMapper.getAuthList(userId);
+    public List<AuthUser> getAuthList(String userId, int limit, int offset, int order){
+
+        return authUserMapper.getAuthList(userId, limit, offset, order);
     }
 }
