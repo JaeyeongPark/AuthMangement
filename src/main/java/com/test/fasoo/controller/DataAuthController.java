@@ -19,7 +19,7 @@ public class DataAuthController {
 
     //유저 권한 생성
     @PostMapping("")
-    public AuthUserResponse createAuthUser(@RequestBody AuthUserRequest authUserRequest){
+    public AuthUserResponse createAuthUser(@RequestHeader String adminUserId,@RequestBody AuthUserRequest authUserRequest){
         //Access Token의 userId를 활용해서 관리자인지 판단하는 코드 추가
 
         AuthUserResponse authUserRes;
@@ -39,13 +39,19 @@ public class DataAuthController {
     }
 
     @PutMapping("")
-    public AuthUserResponse updateAuthUser(@RequestBody AuthUserRequest authUserRequest){
+    public AuthUserResponse updateAuthUser(@RequestHeader String adminUserId, @RequestBody AuthUserRequest authUserRequest){
         AuthUserResponse authUserRes;
 
         authUserRes = authUserService.updateAuthUser(authUserRequest);
 
 
         return authUserRes;
+    }
+
+    @DeleteMapping("")
+    public int deleteAuthUser(@RequestHeader String adminUserId, @RequestParam String userId,String authTypeName, String dataId){
+
+        return authUserService.deleteAuthUser(userId, authTypeName, dataId);
     }
 
     @GetMapping("/list")

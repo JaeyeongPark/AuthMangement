@@ -6,7 +6,6 @@ import com.test.fasoo.mapper.AuthUserMapper;
 import com.test.fasoo.vo.AuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -67,14 +66,6 @@ public class AuthUserService {
     }
 
     public AuthUserResponse updateAuthUser(AuthUserRequest authUserRequest){
-        /*
-         // 중복된 데이터 삽입 확인
-         boolean isDuplicate = authUserMapper.checkDuplicateDate(authUserRequest);
-         if(isDuplicate){
-            return null;
-         }
-         */
-
         //데이터베이스에 권한 추가
         int rowsAffected = authUserMapper.updateAuthUser(authUserRequest);
 
@@ -107,6 +98,14 @@ public class AuthUserService {
 
         return authUserRes;
     }
+
+    public int deleteAuthUser(String userId, String authTypeName, String dataId){
+        System.out.println(userId);
+        System.out.println(authTypeName);
+        System.out.println(dataId);
+        return authUserMapper.deleteAuthUser(userId, authTypeName, dataId);
+    }
+
     //권한 목록 조회(관리자)
     public List<AuthUserRequest> getUserList(String userId){
         return authUserMapper.getUserList(userId);
