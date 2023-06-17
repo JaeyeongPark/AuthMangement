@@ -1,5 +1,6 @@
 package com.test.fasoo.mapper;
 
+import com.test.fasoo.dto.AuthListResponse;
 import com.test.fasoo.dto.AuthUserRequest;
 import com.test.fasoo.vo.AuthUser;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,4 +19,5 @@ public interface AuthUserMapper {
 
     public List<AuthUser> getAuthList(String userId, int limit, int offset, int order);
 
+    public int getAuthCount(String userId);
 }

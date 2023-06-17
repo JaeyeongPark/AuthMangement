@@ -1,6 +1,7 @@
 package com.test.fasoo.controller;
 
 
+import com.test.fasoo.dto.AuthListResponse;
 import com.test.fasoo.dto.AuthUserRequest;
 import com.test.fasoo.dto.AuthUserResponse;
 import com.test.fasoo.service.AuthUserService;
@@ -66,8 +67,8 @@ public class DataAuthController {
 
     //유저가 가지고 있는 권한 목록 조회
     @GetMapping("/list/me")
-    public List<AuthUser> getAuthList(@RequestHeader String userId, @RequestParam(required = false, defaultValue = "0")int limit, @RequestParam(required = false, defaultValue = "0")int offset, @RequestParam(required = false, defaultValue = "0")int order){
-        List<AuthUser> authList;
+    public AuthListResponse getAuthList(@RequestHeader String userId, @RequestParam(required = false, defaultValue = "10")int limit, @RequestParam(required = false, defaultValue = "1")int offset, @RequestParam(required = false, defaultValue = "0")int order){
+        AuthListResponse authList;
 
         authList = authUserService.getAuthList(userId, limit, offset, order);
 

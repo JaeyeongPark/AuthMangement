@@ -1,5 +1,6 @@
 package com.test.fasoo.service;
 
+import com.test.fasoo.dto.AuthListResponse;
 import com.test.fasoo.dto.AuthUserRequest;
 import com.test.fasoo.dto.AuthUserResponse;
 import com.test.fasoo.mapper.AuthUserMapper;
@@ -113,8 +114,12 @@ public class AuthUserService {
         return authUserMapper.getUserList(userId,authTypeName, limit, offset, order);
     }
     //권한 목록 조회(유저)
-    public List<AuthUser> getAuthList(String userId, int limit, int offset, int order){
+    public AuthListResponse getAuthList(String userId, int limit, int offset, int order){
 
-        return authUserMapper.getAuthList(userId, limit, offset, order);
+        AuthListResponse authListResponse = new AuthListResponse();
+
+        authListResponse.setAuthInfoList(authUserMapper.getAuthList(userId, limit, offset, order));
+        authListResponse.setTotalCount(authUserMapper.getAuthCount(userId));
+        return authListResponse;
     }
 }
