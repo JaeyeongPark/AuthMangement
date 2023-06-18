@@ -52,8 +52,15 @@
 
     <!-- 관리자가 유저 권한 목록 조회 -->
     <select id="getUserList" parameterType="java.lang.String" resultType="com.test.fasoo.vo.AuthUser">
+        SELECT count(*) FROM auth_user WHERE auth_type_id = (
+            SELECT id FROM auth_type WHERE auth_type_name = #{authTypeName}
+        )
+    </select>
+
+
+    <select id="getUserCount" parameterType="java.lang.String" resultType="java.lang.Integer">
         SELECT * FROM auth_user WHERE auth_type_id = (
-            SELECT auth_type_id FROM  WHERE
+            SELECT id FROM auth_type WHERE auth_type_name = #{authTypeName}
         )
     </select>
 

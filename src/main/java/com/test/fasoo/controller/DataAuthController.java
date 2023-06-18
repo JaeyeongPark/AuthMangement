@@ -57,8 +57,8 @@ public class DataAuthController {
 
     //관리자가 권한을 가지고 있는 유저 목록을 조회
     @GetMapping("/list")
-    public List<AuthUser> getUserList(@RequestHeader String userId, @RequestParam(required = false) String authTypeName, int limit, int offset, int order) {
-        List<AuthUser> userList;
+    public AuthListResponse getUserList(@RequestHeader String userId, @RequestParam(required = false) String authTypeName, int limit, int offset, int order) {
+        AuthListResponse userList;
 
         userList = authUserService.getUserList(userId,authTypeName, limit, offset, order);
 

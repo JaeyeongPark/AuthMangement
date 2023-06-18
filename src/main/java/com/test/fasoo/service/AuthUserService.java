@@ -5,7 +5,6 @@ import com.test.fasoo.dto.AuthUserRequest;
 import com.test.fasoo.dto.AuthUserResponse;
 import com.test.fasoo.mapper.AuthUserMapper;
 import com.test.fasoo.vo.AuthUser;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -109,9 +108,12 @@ public class AuthUserService {
     }
 
     //권한 목록 조회(관리자)
-    public List<AuthUser> getUserList(String userId,String authTypeName, int limit, int offset, int order){
+    public AuthListResponse getUserList(String userId,String authTypeName, int limit, int offset, int order){
+        AuthListResponse authListResponse = new AuthListResponse();
 
-        return authUserMapper.getUserList(userId,authTypeName, limit, offset, order);
+        authListResponse.setTotalCount(authUserMapper.getUserCount(authTypeName));
+        authListResponse.setAuthInfoList(authUserMapper.getUserList(userId, authTypeName, limit,offset,order));
+        return authListResponse;
     }
     //권한 목록 조회(유저)
     public AuthListResponse getAuthList(String userId, int limit, int offset, int order){
