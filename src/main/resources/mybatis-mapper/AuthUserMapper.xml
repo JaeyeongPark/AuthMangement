@@ -13,7 +13,7 @@
     </insert>
 
     <!-- 권한 생성 후 생성된 목록 조회 -->
-    <select id="getCreateId" parameterType="java.lang.String" resultType="java.lang.String">
+    <select id="getAuthByRequestId" parameterType="java.lang.String" resultType="com.test.fasoo.dto.AuthIdDto">
         SELECT id FROM auth_user WHERE request_id = #{requestId}
     </select>
 

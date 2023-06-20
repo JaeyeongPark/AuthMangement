@@ -1,11 +1,11 @@
 package com.test.fasoo.service;
 
+import com.test.fasoo.dto.AuthIdDto;
 import com.test.fasoo.dto.AuthInfoDto;
-import com.test.fasoo.dto.AuthListResponse;
+import com.test.fasoo.dto.AuthInfoListResponse;
 import com.test.fasoo.dto.AuthUserRequest;
 import com.test.fasoo.mapper.AuthUserMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,29 +19,29 @@ public class AuthUserService {
 
     //유저 권한 추가
     @Transactional
-    public List<String> createAuthUser(AuthUserRequest authUserRequest) {
+    public List<AuthIdDto> createAuthUser(AuthUserRequest authUserRequest) {
         //데이터베이스에 권한 추가
         int rowsAffected = authUserMapper.createAuthUser(authUserRequest);
 
         //생성된 id 조회
-        List<String> authUserId = authUserMapper.getCreateId(authUserRequest.getRequestId());
+        List<AuthIdDto> authIdList = authUserMapper.getCreateId(authUserRequest.getRequestId());
 
-        return authUserId;
+        return authIdList;
     }
     //유저 권한 조회
     public AuthInfoDto getAuthUser(String userId, String authTypeId, String dataId){
         return authUserMapper.getAuthUser(userId, authTypeId, dataId);
     }
 
-    public List<String> updateAuthUser(AuthUserRequest authUserRequest){
+    public List<AuthIdDto> updateAuthUser(AuthUserRequest authUserRequest){
         //데이터베이스에 권한 추가
         int rowsAffected = authUserMapper.updateAuthUser(authUserRequest);
 
         //생성된 데이터 조회
 
-        List<String> authUserId = authUserMapper.getCreateId(authUserRequest.getRequestId());
+        List<AuthIdDto> authIdList = authUserMapper.getCreateId(authUserRequest.getRequestId());
 
-        return authUserId;
+        return authIdList;
     }
 
     public int deleteAuthUser(String userId, String authTypeId, String dataId){
@@ -49,17 +49,17 @@ public class AuthUserService {
     }
 
     //권한 목록 조회(관리자)
-    public AuthListResponse getUserList(String userId,String authTypeId, int limit, int offset, int order){
-        AuthListResponse authListResponse = new AuthListResponse();
+    public AuthInfoListResponse getUserList(String userId, String authTypeId, int limit, int offset, int order){
+        AuthInfoListResponse authListResponse = new AuthInfoListResponse();
 
         authListResponse.setTotalCount(authUserMapper.getUserCount(authTypeId));
         authListResponse.setAuthInfoList(authUserMapper.getUserList(userId, authTypeId, limit,offset,order));
         return authListResponse;
     }
     //권한 목록 조회(유저)
-    public AuthListResponse getAuthList(String userId, int limit, int offset, int order){
+    public AuthInfoListResponse getAuthList(String userId, int limit, int offset, int order){
 
-        AuthListResponse authListResponse = new AuthListResponse();
+        AuthInfoListResponse authListResponse = new AuthInfoListResponse();
 
         authListResponse.setAuthInfoList(authUserMapper.getAuthList(userId, limit, offset, order));
         authListResponse.setTotalCount(authUserMapper.getAuthCount(userId));
