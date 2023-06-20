@@ -4,24 +4,29 @@ package com.test.fasoo.dto;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-@ToString
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthUserRequest {
-    private String authTypeName;
+
+    @NotNull
+    private String authTypeId;
+    @NotNull
     private String userId;
+    @NotNull
     private String requestId;
-    private List<String> dataList;
+    @NotNull
+    private List<String> resourceIdList;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date beginDate;
+    private LocalDate beginDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date expireDate;
+    private LocalDate expireDate;
 
 
 }

@@ -1,18 +1,15 @@
 package com.test.fasoo.dto;
 
-import com.test.fasoo.vo.AuthUser;
 import lombok.*;
-
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
 
-@ToString
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthListResponse {
-    List<AuthUser> authInfoList;
+    List<AuthInfoDto> authInfoList;
     int totalCount;
 }

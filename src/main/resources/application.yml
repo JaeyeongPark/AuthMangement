@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+#My-Batis
+mybatis:
+  mapper-locations: mybatis-mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+#MySQL
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/auth_local_prototype
+    username: newuser
+    password: fasoo05!
