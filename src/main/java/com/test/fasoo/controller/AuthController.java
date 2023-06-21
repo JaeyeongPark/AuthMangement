@@ -10,18 +10,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-public class DataAuthController {
+public class AuthController {
 
     private final AuthUserService authUserService;
 
     //유저 권한 생성
     @PostMapping("")
-    public ResponseEntity<List<AuthIdDto>> createAuthUser(@RequestHeader String adminUserId, @RequestBody AuthUserRequest authUserRequest){
+    public ResponseEntity<List<AuthIdDto>> createAuthUser(@RequestHeader String adminUserId, @RequestBody @Valid AuthUserRequest authUserRequest){
         //Access Token의 userId를 활용해서 관리자인지 판단하는 코드 추가
 
         List<AuthIdDto> authUserId = authUserService.createAuthUser(authUserRequest);

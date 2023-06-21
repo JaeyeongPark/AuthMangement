@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthIdDto {
-    String auth_user_id;
-    String resource_id;
+    String authUserId;
+    String resourceId;
 }

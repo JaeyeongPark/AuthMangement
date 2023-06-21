@@ -11,10 +11,14 @@
                 (#{authTypeId}, #{userId}, #{requestId}, #{resourceId}, #{beginDate}, #{expireDate})
             </foreach>
     </insert>
+    <!--requestId 개수 조회-->
+    <select id="checkRequestIdDuplicate" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(*) FROM auth_user WHERE request_id = #{requestId}
+    </select>
 
     <!-- 권한 생성 후 생성된 목록 조회 -->
     <select id="getAuthByRequestId" parameterType="java.lang.String" resultType="com.test.fasoo.dto.AuthIdDto">
-        SELECT id FROM auth_user WHERE request_id = #{requestId}
+        SELECT id as authUserId, resource_id FROM auth_user WHERE request_id = #{requestId}
     </select>
 
 

@@ -10,6 +10,7 @@ import java.util.List;
 @Mapper
 public interface AuthUserMapper {
     public int createAuthUser(AuthUserRequest authUserRequest);
+    public int checkRequestIdDuplicate(String requestId);
     public List<AuthIdDto> getAuthByRequestId(String requestId);
     public AuthInfoDto getAuthUser(String userId, String authTypeId, String dataId);
     public int updateAuthUser(AuthUserRequest authUserRequest);

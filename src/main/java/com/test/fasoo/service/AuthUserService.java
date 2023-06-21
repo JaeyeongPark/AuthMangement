@@ -4,11 +4,15 @@ import com.test.fasoo.dto.AuthIdDto;
 import com.test.fasoo.dto.AuthInfoDto;
 import com.test.fasoo.dto.AuthInfoListResponse;
 import com.test.fasoo.dto.AuthUserRequest;
+import com.test.fasoo.exception.CustomErrorCode;
+import com.test.fasoo.exception.CustomException;
 import com.test.fasoo.mapper.AuthUserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -20,16 +24,44 @@ public class AuthUserService {
     //유저 권한 추가
     @Transactional
     public List<AuthIdDto> createAuthUser(AuthUserRequest authUserRequest) {
-        //데이터베이스에 권한 추가
-        int rowsAffected = authUserMapper.createAuthUser(authUserRequest);
+
+        if(authUserRequest.getBeginDate().isAfter(authUserRequest.getExpireDate())){
+            throw new CustomException(CustomErrorCode.BEGIN_AFTER_EXPIRE);
+        }
+
+        //request_id 중복 조회
+        if (authUserMapper.checkRequestIdDuplicate(authUserRequest.getRequestId()) > 0){
+            throw new CustomException(CustomErrorCode.DUPLICATED_REQUEST_ID);
+        }
+
+        try{
+            authUserMapper.createAuthUser(authUserRequest);
+        }catch (DataIntegrityViolationException e){
+            SQLException cause = (SQLException) e.getCause();
+
+            if(cause.getErrorCode() == 1062){     // UNIQUE 조건 위반
+                throw new CustomException(CustomErrorCode.DUPLICATED_AUTH);
+            }else if(cause.getErrorCode() == 1452){     // FK 조건 위반
+                throw new CustomException(CustomErrorCode.UNDEFINED_AUTH_TYPE);
+            } else{
+                throw new RuntimeException("UNEXPECTED_ERROR_EXECUTING_QUERY");
+            }
+        }catch (Exception e){
+            throw new RuntimeException("UNEXPECTED_ERROR_EXECUTING_QUERY");
+        }
+
 
         //생성된 id 조회
-        List<AuthIdDto> authIdList = authUserMapper.getCreateId(authUserRequest.getRequestId());
+        List<AuthIdDto> authIdList = authUserMapper.getAuthByRequestId(authUserRequest.getRequestId());
+
 
         return authIdList;
+
     }
     //유저 권한 조회
     public AuthInfoDto getAuthUser(String userId, String authTypeId, String dataId){
+
+
         return authUserMapper.getAuthUser(userId, authTypeId, dataId);
     }
 
@@ -39,7 +71,7 @@ public class AuthUserService {
 
         //생성된 데이터 조회
 
-        List<AuthIdDto> authIdList = authUserMapper.getCreateId(authUserRequest.getRequestId());
+        List<AuthIdDto> authIdList = authUserMapper.getAuthByRequestId(authUserRequest.getRequestId());
 
         return authIdList;
     }
@@ -65,4 +97,5 @@ public class AuthUserService {
         authListResponse.setTotalCount(authUserMapper.getAuthCount(userId));
         return authListResponse;
     }
+
 }
