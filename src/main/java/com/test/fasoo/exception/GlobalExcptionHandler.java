@@ -31,7 +31,7 @@ public class GlobalExcptionHandler extends ResponseEntityExceptionHandler {
 
     private ErrorResponse makeErrorResponse(ErrorCode errorCode){
         return ErrorResponse.builder()
-                .code(errorCode.name())
+                .code(errorCode.getCode())
                 .message(errorCode.getMessage())
                 .build();
     }
@@ -63,7 +63,7 @@ public class GlobalExcptionHandler extends ResponseEntityExceptionHandler {
                 .collect(Collectors.toList());
 
         return ErrorResponse.builder()
-                .code(errorCode.name())
+                .code(errorCode.getCode())
                 .message(errorCode.getMessage())
                 .errors(validationErrorList)
                 .build();
