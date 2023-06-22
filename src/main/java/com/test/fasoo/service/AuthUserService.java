@@ -56,8 +56,8 @@ public class AuthUserService {
 
 
         return authIdList;
-
     }
+
     //유저 권한 조회
     public AuthInfoDto getAuthUser(String userId, String authTypeId, String dataId){
 
