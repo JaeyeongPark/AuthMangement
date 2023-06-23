@@ -1,9 +1,9 @@
 package com.test.fasoo.service;
 
-import com.test.fasoo.dto.AuthIdDto;
-import com.test.fasoo.dto.AuthInfoDto;
-import com.test.fasoo.dto.AuthInfoListResponse;
-import com.test.fasoo.dto.AuthUserRequest;
+import com.test.fasoo.dto.AuthUser.AuthIdDto;
+import com.test.fasoo.dto.AuthUser.AuthInfoDto;
+import com.test.fasoo.dto.AuthUser.AuthInfoListResponse;
+import com.test.fasoo.dto.AuthUser.AuthUserRequest;
 import com.test.fasoo.exception.CustomErrorCode;
 import com.test.fasoo.exception.CustomException;
 import com.test.fasoo.mapper.AuthUserMapper;

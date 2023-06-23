@@ -1,10 +1,10 @@
 package com.test.fasoo.controller;
 
 
-import com.test.fasoo.dto.AuthIdDto;
-import com.test.fasoo.dto.AuthInfoDto;
-import com.test.fasoo.dto.AuthInfoListResponse;
-import com.test.fasoo.dto.AuthUserRequest;
+import com.test.fasoo.dto.AuthUser.AuthIdDto;
+import com.test.fasoo.dto.AuthUser.AuthInfoDto;
+import com.test.fasoo.dto.AuthUser.AuthInfoListResponse;
+import com.test.fasoo.dto.AuthUser.AuthUserRequest;
 import com.test.fasoo.service.AuthUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

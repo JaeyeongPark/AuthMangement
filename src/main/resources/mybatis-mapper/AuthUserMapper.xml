@@ -4,7 +4,7 @@
 
 <mapper namespace = "com.test.fasoo.mapper.AuthUserMapper">
     <!-- 권한 생성 -->
-    <insert id="createAuthUser" parameterType="com.test.fasoo.dto.AuthUserRequest">
+    <insert id="createAuthUser" parameterType="com.test.fasoo.dto.AuthUser.AuthUserRequest">
         INSERT INTO auth_user(auth_type_id, user_id, request_id, resource_id, begin_date, expire_date)
         VALUES
             <foreach collection="resourceIdList"  item="resourceId" separator=",">
@@ -17,13 +17,13 @@
     </select>
 
     <!-- 권한 생성 후 생성된 목록 조회 -->
-    <select id="getAuthByRequestId" parameterType="java.lang.String" resultType="com.test.fasoo.dto.AuthIdDto">
+    <select id="getAuthByRequestId" parameterType="java.lang.String" resultType="com.test.fasoo.dto.AuthUser.AuthIdDto">
         SELECT id as authUserId, resource_id FROM auth_user WHERE request_id = #{requestId}
     </select>
 
 
     <!-- 유저 권한 조회 -->
-    <select id="getAuthUser" parameterType="java.lang.String" resultType="com.test.fasoo.dto.AuthInfoDto">
+    <select id="getAuthUser" parameterType="java.lang.String" resultType="com.test.fasoo.dto.AuthUser.AuthInfoDto">
         SELECT * FROM auth_user
         WHERE user_id = #{userId}
         AND auth_type_id = #{authTypeId}
@@ -32,7 +32,7 @@
 
 
     <!-- 권한 정보 업데이트 -->
-    <update id="updateAuthUser" parameterType="com.test.fasoo.dto.AuthUserRequest">
+    <update id="updateAuthUser" parameterType="com.test.fasoo.dto.AuthUser.AuthUserRequest">
         UPDATE auth_user SET
         <foreach collection="resourceIdList" item="resourceId" separator=",">
             request_id = #{requestId},
@@ -54,7 +54,7 @@
 
 
     <!-- 관리자가 유저 권한 목록 조회 -->
-    <select id="getUserList" parameterType="java.lang.String" resultType="com.test.fasoo.dto.AuthInfoDto">
+    <select id="getUserList" parameterType="java.lang.String" resultType="com.test.fasoo.dto.AuthUser.AuthInfoDto">
         SELECT * FROM auth_user WHERE auth_type_id = #{authTypeId}
         <if test="limit != 0">
             LIMIT #{limit}
@@ -71,7 +71,7 @@
 
 
     <!-- 유저가 자신의 권한 목록 조회 -->
-    <select id="getAuthList" parameterType="java.lang.String" resultType="com.test.fasoo.dto.AuthInfoDto">
+    <select id="getAuthList" parameterType="java.lang.String" resultType="com.test.fasoo.dto.AuthUser.AuthInfoDto">
         SELECT * FROM auth_user WHERE user_id = #{userId}
         <if test="limit != 0">
             LIMIT #{limit}

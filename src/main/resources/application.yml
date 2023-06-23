@@ -14,3 +14,6 @@ spring:
     url: jdbc:mysql://localhost:3306/auth_local_prototype
     username: newuser
     password: fasoo05!
+
+
+secret-key : 1234

@@ -1,4 +1,4 @@
-package com.test.fasoo.dto;
+package com.test.fasoo.dto.AuthUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
