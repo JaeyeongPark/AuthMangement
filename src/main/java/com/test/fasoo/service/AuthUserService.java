@@ -1,9 +1,6 @@
 package com.test.fasoo.service;
 
-import com.test.fasoo.dto.AuthIdDto;
-import com.test.fasoo.dto.AuthInfoDto;
-import com.test.fasoo.dto.AuthInfoListResponse;
-import com.test.fasoo.dto.AuthUserRequest;
+import com.test.fasoo.dto.*;
 import com.test.fasoo.exception.CustomErrorCode;
 import com.test.fasoo.exception.CustomException;
 import com.test.fasoo.mapper.AuthUserMapper;
@@ -59,10 +56,23 @@ public class AuthUserService {
 
     }
     //유저 권한 조회
-    public AuthInfoDto getAuthUser(String userId, String authTypeId, String dataId){
+    public AuthInfoDto getAuthUser(CheckAuthRequest checkAuthRequest){
+        AuthInfoDto authInfoDto = new AuthInfoDto();
+
+        try{
+            authInfoDto = authUserMapper.getAuthUser(checkAuthRequest);
+
+            if (authInfoDto == null){
+                throw new CustomException(CustomErrorCode.NOT_FOUND_AUTH);
+            }
+        }catch(RuntimeException e){
+            throw new RuntimeException("UNEXPECTED_ERROR_EXECUTING_QUERY");
+        }catch (Exception e){
+            throw new RuntimeException("UNEXPECTED_ERROR_EXECUTING_QUERY");
+        }
 
 
-        return authUserMapper.getAuthUser(userId, authTypeId, dataId);
+        return authInfoDto;
     }
 
     public List<AuthIdDto> updateAuthUser(AuthUserRequest authUserRequest){

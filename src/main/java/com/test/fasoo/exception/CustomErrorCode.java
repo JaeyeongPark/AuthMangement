@@ -13,6 +13,11 @@ public enum CustomErrorCode implements ErrorCode {
     BEGIN_AFTER_EXPIRE(HttpStatus.BAD_REQUEST,"권한 시작일이 만료일 이후 입니다."),
     DUPLICATED_REQUEST_ID(HttpStatus.BAD_REQUEST, "신청 ID가 중복됩니다."),
     INVALID_PARAMETER(HttpStatus.BAD_REQUEST,"Invalid parameter included"),
+
+
+
+    //getAuthUser 예외처리
+    NOT_FOUND_AUTH(HttpStatus.BAD_REQUEST,"권한이 존재하지 않습니다.");
     ;
 
     private final HttpStatus httpStatus;
