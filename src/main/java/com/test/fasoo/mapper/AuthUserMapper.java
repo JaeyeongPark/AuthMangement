@@ -1,7 +1,7 @@
 package com.test.fasoo.mapper;
 
 
-import com.test.fasoo.dto.CheckAuthRequest;
+import com.test.fasoo.dto.AuthUser.CheckAuthRequest;
 import com.test.fasoo.dto.AuthUser.AuthIdDto;
 import com.test.fasoo.dto.AuthUser.AuthInfoDto;
 import com.test.fasoo.dto.AuthUser.AuthUserRequest;

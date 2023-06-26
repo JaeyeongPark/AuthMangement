@@ -5,7 +5,7 @@ import com.test.fasoo.dto.AuthUser.AuthIdDto;
 import com.test.fasoo.dto.AuthUser.AuthInfoDto;
 import com.test.fasoo.dto.AuthUser.AuthInfoListResponse;
 import com.test.fasoo.dto.AuthUser.AuthUserRequest;
-import com.test.fasoo.dto.CheckAuthRequest;
+import com.test.fasoo.dto.AuthUser.CheckAuthRequest;
 import com.test.fasoo.exception.CustomErrorCode;
 import com.test.fasoo.exception.CustomException;
 import com.test.fasoo.mapper.AuthUserMapper;
