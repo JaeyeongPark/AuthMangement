@@ -1,9 +1,11 @@
 package com.test.fasoo.mapper;
 
-import com.test.fasoo.dto.AuthIdDto;
-import com.test.fasoo.dto.AuthInfoDto;
-import com.test.fasoo.dto.AuthUserRequest;
+
 import com.test.fasoo.dto.CheckAuthRequest;
+import com.test.fasoo.dto.AuthUser.AuthIdDto;
+import com.test.fasoo.dto.AuthUser.AuthInfoDto;
+import com.test.fasoo.dto.AuthUser.AuthUserRequest;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

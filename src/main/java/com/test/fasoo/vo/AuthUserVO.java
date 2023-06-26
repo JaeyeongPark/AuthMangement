@@ -4,14 +4,11 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-import java.util.List;
 
 
-@ToString
+
 @Getter
-@Setter
-@AllArgsConstructor
-public class AuthUser {
+public class AuthUserVO {
 
     private Long id;
     private String authTypeId;

@@ -1,6 +1,11 @@
 package com.test.fasoo.service;
 
-import com.test.fasoo.dto.*;
+
+import com.test.fasoo.dto.AuthUser.AuthIdDto;
+import com.test.fasoo.dto.AuthUser.AuthInfoDto;
+import com.test.fasoo.dto.AuthUser.AuthInfoListResponse;
+import com.test.fasoo.dto.AuthUser.AuthUserRequest;
+import com.test.fasoo.dto.CheckAuthRequest;
 import com.test.fasoo.exception.CustomErrorCode;
 import com.test.fasoo.exception.CustomException;
 import com.test.fasoo.mapper.AuthUserMapper;
@@ -53,8 +58,8 @@ public class AuthUserService {
 
 
         return authIdList;
-
     }
+
     //유저 권한 조회
     public AuthInfoDto getAuthUser(CheckAuthRequest checkAuthRequest){
         AuthInfoDto authInfoDto = new AuthInfoDto();
