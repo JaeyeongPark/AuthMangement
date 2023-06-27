@@ -1,6 +1,5 @@
 package com.test.fasoo.exception;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +16,21 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExcptionHandler extends ResponseEntityExceptionHandler {
 
+
+    // ---------------------- RuntimeException 예외처리 (예기치 못한 문제 발생) ---------------------------
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Object> handleCustomException(RuntimeException e){
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setCode("INTERNAL_SERVER_ERROR");
+        errorResponse.setMessage("예기치 못한 문제가 발생하여 요청이 실패했습니다.");
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(errorResponse);
+    }
+
+
+
+    //-----------CustomException 예외처리 --------------------------
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<Object> handleCustomException(CustomException e){
         ErrorCode errorCode = e.getErrorCode();
@@ -30,10 +44,8 @@ public class GlobalExcptionHandler extends ResponseEntityExceptionHandler {
     }
 
     private ErrorResponse makeErrorResponse(ErrorCode errorCode){
-        return ErrorResponse.builder()
-                .code(errorCode.getCode())
-                .message(errorCode.getMessage())
-                .build();
+        ErrorResponse errorResponse = new ErrorResponse(errorCode.getCode(),errorCode.getMessage());
+        return errorResponse;
     }
 
 
@@ -62,11 +74,12 @@ public class GlobalExcptionHandler extends ResponseEntityExceptionHandler {
                 .map(ErrorResponse.ValidationError::of)
                 .collect(Collectors.toList());
 
-        return ErrorResponse.builder()
-                .code(errorCode.getCode())
-                .message(errorCode.getMessage())
-                .errors(validationErrorList)
-                .build();
+
+        return new ErrorResponse(
+                errorCode.getCode(),
+                errorCode.getMessage(),
+                validationErrorList
+        );
     }
 
     // --------------@Valid 예외처리---------------------------

@@ -1,11 +1,8 @@
 package com.test.fasoo.service;
 
 
+import com.test.fasoo.dto.AuthUser.*;
 import com.test.fasoo.dto.AuthUser.AuthIdDto;
-import com.test.fasoo.dto.AuthUser.AuthInfoDto;
-import com.test.fasoo.dto.AuthUser.AuthInfoListResponse;
-import com.test.fasoo.dto.AuthUser.AuthUserRequest;
-import com.test.fasoo.dto.AuthUser.CheckAuthRequest;
 import com.test.fasoo.exception.CustomErrorCode;
 import com.test.fasoo.exception.CustomException;
 import com.test.fasoo.mapper.AuthUserMapper;
@@ -13,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.constraints.NotEmpty;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class AuthUserService {
 
     //유저 권한 추가
     @Transactional
-    public List<AuthIdDto> createAuthUser(AuthUserRequest authUserRequest) {
+    public AuthIdListResponse createAuthUser(AuthUserRequest authUserRequest) {
 
         if(authUserRequest.getBeginDate().isAfter(authUserRequest.getExpireDate())){
             throw new CustomException(CustomErrorCode.BEGIN_AFTER_EXPIRE);
@@ -57,27 +56,24 @@ public class AuthUserService {
         List<AuthIdDto> authIdList = authUserMapper.getAuthByRequestId(authUserRequest.getRequestId());
 
 
-        return authIdList;
+        AuthIdListResponse authIdListDto = new AuthIdListResponse();
+        authIdListDto.setAuthIdDtoList(authIdList);
+
+        return authIdListDto;
     }
 
     //유저 권한 조회
     public AuthInfoDto getAuthUser(CheckAuthRequest checkAuthRequest){
-        AuthInfoDto authInfoDto = new AuthInfoDto();
 
-        try{
-            authInfoDto = authUserMapper.getAuthUser(checkAuthRequest);
 
-            if (authInfoDto == null){
-                throw new CustomException(CustomErrorCode.NOT_FOUND_AUTH);
-            }
-        }catch(RuntimeException e){
-            throw new RuntimeException("UNEXPECTED_ERROR_EXECUTING_QUERY");
-        }catch (Exception e){
-            throw new RuntimeException("UNEXPECTED_ERROR_EXECUTING_QUERY");
+        AuthInfoDto authInfoDto = authUserMapper.getAuthUser(checkAuthRequest);
+
+        if (authInfoDto == null){
+            throw new CustomException(CustomErrorCode.NOT_FOUND_AUTH);
         }
 
-
         return authInfoDto;
+
     }
 
     public List<AuthIdDto> updateAuthUser(AuthUserRequest authUserRequest){

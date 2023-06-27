@@ -4,8 +4,9 @@ import lombok.*;
 
 import java.util.List;
 
-
-
+/*
+    권한 목록을 응답하기 위한 객체
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

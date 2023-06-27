@@ -5,6 +5,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+
+/*
+    사용자의 권한 정보를 응답할 때 사용되는 클래스
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

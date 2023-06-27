@@ -23,7 +23,7 @@
 
 
     <!-- 유저 권한 조회 -->
-    <select id="getAuthUser" parameterType="java.lang.String" resultType="com.test.fasoo.dto.AuthUser.AuthInfoDto">
+    <select id="getAuthUser" parameterType="com.test.fasoo.dto.AuthUser.CheckAuthRequest" resultType="com.test.fasoo.dto.AuthUser.AuthInfoDto">
         SELECT * FROM auth_user
         WHERE user_id = #{userId}
         AND auth_type_id = #{authTypeId}

@@ -9,6 +9,9 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
+/*
+    createAuthUser에서 사용자에게 요청받는 클래스
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

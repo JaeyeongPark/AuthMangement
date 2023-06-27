@@ -6,28 +6,33 @@ import org.springframework.validation.FieldError;
 
 import java.util.List;
 
-@Getter
-@Builder
-@RequiredArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ErrorResponse {
-    private final String code;
-    private final String message;
+    private String code;
+    private String message;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private final List<ValidationError> errors;
+    private List<ValidationError> errors;
 
-    @Getter
-    @Builder
-    @RequiredArgsConstructor
+    public ErrorResponse(String code, String message){
+        this.code = code;
+        this.message = message;
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class ValidationError{
-        private final String field;
-        private final String message;
+        private String field;
+        private String message;
 
         public static ValidationError of(final FieldError fieldError){
-            return ValidationError.builder()
-                    .field(fieldError.getField())
-                    .message(fieldError.getDefaultMessage())
-                    .build();
+            return new ValidationError(
+                    fieldError.getField(),
+                    fieldError.getDefaultMessage()
+            );
         }
     }
 }
