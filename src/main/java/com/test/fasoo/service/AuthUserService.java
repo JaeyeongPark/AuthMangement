@@ -73,7 +73,6 @@ public class AuthUserService {
         }
 
         return authInfoDto;
-
     }
 
     public List<AuthIdDto> updateAuthUser(AuthUserRequest authUserRequest){

@@ -42,7 +42,7 @@ public class AuthConrollerTest {
 
         AuthUserRequest authUserRequest = AuthSteps.권한생성요청_생성();
 
-//        AuthIdListDto authIdListDto = AuthSteps.권한생성응답_생성();
+//        AuthIdListResponse authIdListDto = AuthSteps.권한생성응답_생성();
 
 
         String jsonRequest = objectMapper.writeValueAsString(authUserRequest);
@@ -60,12 +60,12 @@ public class AuthConrollerTest {
     @DisplayName("권한 조회")
     @Test
     public void 컨트롤러_권한조회() throws Exception{
-
+        CheckAuthRequest checkAuthRequest = new CheckAuthRequest("pjys211","Data_use","resouceId");
 
         mockMvc.perform(
                         MockMvcRequestBuilders.get("/auth")
                                 .param("userId","pjys211")
-                                .param("authTypeName","Data_use")
+                                .param("authTypeId","Data_use")
                                 .param("resourceId","data1")
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
