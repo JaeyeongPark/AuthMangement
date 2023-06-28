@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotEmpty;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -70,6 +71,14 @@ public class AuthUserService {
 
         if (authInfoDto == null){
             throw new CustomException(CustomErrorCode.NOT_FOUND_AUTH);
+        }
+
+        if (authInfoDto.getBeginDate().isAfter(LocalDate.now()) ){
+            throw new CustomException(CustomErrorCode.BEGIN_AFTER_NOW);
+        }
+
+        if (authInfoDto.getExpireDate().isBefore(LocalDate.now())){
+            throw new CustomException(CustomErrorCode.EXPIRE_BEFORE_NOW);
         }
 
         return authInfoDto;
