@@ -9,12 +9,12 @@ import java.util.List;
 public class AuthSteps {
     public static List<AuthIdDto> 권한생성응답_생성() {
         AuthIdDto authIdDto1 = new AuthIdDto();
-        authIdDto1.setResourceId("Data1");
+        authIdDto1.setResourceId("data1");
         authIdDto1.setAuthUserId("1");
 
         AuthIdDto authIdDto2 = new AuthIdDto();
-        authIdDto2.setResourceId("Data2");
-        authIdDto2.setAuthUserId("1");
+        authIdDto2.setResourceId("data2");
+        authIdDto2.setAuthUserId("2");
 
         List<AuthIdDto> list = new ArrayList<>();
         list.add(authIdDto1);
@@ -28,7 +28,7 @@ public class AuthSteps {
         String authTypeId = "Data_use";
         String requestId = "request1";
         String userId = "pjys211";
-        String resourceId = "date1";
+        String resourceId = "data1";
         LocalDate beginDate = LocalDate.of(2023,06,30);
         LocalDate expireDate = LocalDate.of(2023,07,30);
         LocalDate createTime = LocalDate.of(2023,06,30);
@@ -39,7 +39,7 @@ public class AuthSteps {
 
 
     public static AuthUserRequest 권한생성요청_생성() {
-        String authTypeId = "Data_user";
+        String authTypeId = "Data_use";
         String userId = "pjys211";
         String requestId = "request1";
         List<String> resourceIdList = new ArrayList<>();
