@@ -36,7 +36,7 @@ public class AuthConrollerTest {
     private AuthUserService authUserService;
 
 
-    @DisplayName("권한 생성")
+    @DisplayName("컨트롤러_권한생성")
     @Test
     public void 컨트롤러_권한생성() throws Exception{
 
@@ -57,7 +57,7 @@ public class AuthConrollerTest {
 //              .andExpect(MockMvcResultMatchers.content().json(jsonResponse,false);
     }
 
-    @DisplayName("권한 조회")
+    @DisplayName("컨트롤러_권한조회")
     @Test
     public void 컨트롤러_권한조회() throws Exception{
         CheckAuthRequest checkAuthRequest = new CheckAuthRequest("pjys211","Data_use","resouceId");

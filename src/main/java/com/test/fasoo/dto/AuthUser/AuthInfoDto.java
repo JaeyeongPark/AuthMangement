@@ -3,6 +3,7 @@ package com.test.fasoo.dto.AuthUser;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -20,11 +21,11 @@ public class AuthInfoDto {
     private String resourceId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date beginDate;
+    private LocalDate beginDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date expireDate;
+    private LocalDate expireDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date createTime;
+    private LocalDate createTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date updateTime;
+    private LocalDate updateTime;
 }

@@ -1,16 +1,13 @@
 package com.test.fasoo.steps;
 
-import com.test.fasoo.dto.AuthUser.AuthIdDto;
-import com.test.fasoo.dto.AuthUser.AuthIdListResponse;
-import com.test.fasoo.dto.AuthUser.AuthUserRequest;
-import com.test.fasoo.dto.AuthUser.CheckAuthRequest;
+import com.test.fasoo.dto.AuthUser.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AuthSteps {
-    public static AuthIdListResponse 권한생성응답_생성() {
+    public static List<AuthIdDto> 권한생성응답_생성() {
         AuthIdDto authIdDto1 = new AuthIdDto();
         authIdDto1.setResourceId("Data1");
         authIdDto1.setAuthUserId("1");
@@ -23,11 +20,21 @@ public class AuthSteps {
         list.add(authIdDto1);
         list.add(authIdDto2);
 
-        AuthIdListResponse authIdListDto = new AuthIdListResponse();
-        authIdListDto.setAuthIdDtoList(list);
+        return list;
+    }
 
-        return authIdListDto;
+    public static AuthInfoDto 권한조회응답_생성(){
+        Long id = 1L;
+        String authTypeId = "Data_use";
+        String requestId = "request1";
+        String userId = "pjys211";
+        String resourceId = "date1";
+        LocalDate beginDate = LocalDate.of(2023,06,30);
+        LocalDate expireDate = LocalDate.of(2023,07,30);
+        LocalDate createTime = LocalDate.of(2023,06,30);
+        LocalDate updateTime = LocalDate.of(2023,06,30);
 
+        return new AuthInfoDto(id,authTypeId,requestId,userId,resourceId,beginDate,expireDate,createTime,updateTime);
     }
 
 
