@@ -24,7 +24,7 @@ public enum CustomErrorCode implements ErrorCode {
 
     //getAuthUser 예외처리
     NOT_FOUND_AUTH(HttpStatus.BAD_REQUEST,"NOT_FOUND_AUTH","권한이 존재하지 않습니다."),
-    BEGIN_AFTER_NOW(HttpStatus.BAD_REQUEST,"BEGIN_AFTER_NOW","아직 권한 시작일이 지나지 않았습니다."),
+    BEGIN_AFTER_NOW(HttpStatus.BAD_REQUEST,"BEGIN_AFTER_NOW","권한 시작일이 지나지 않았습니다."),
     EXPIRE_BEFORE_NOW(HttpStatus.BAD_REQUEST,"EXPIRE_BEFORE_NOW","권한의 기간이 만료되었습니다.");
 
 

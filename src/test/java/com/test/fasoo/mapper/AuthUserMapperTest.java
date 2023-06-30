@@ -1,8 +1,6 @@
 package com.test.fasoo.mapper;
 
-import com.test.fasoo.dto.AuthUser.AuthIdDto;
-import com.test.fasoo.dto.AuthUser.AuthIdListResponse;
-import com.test.fasoo.dto.AuthUser.AuthUserRequest;
+import com.test.fasoo.dto.AuthUser.*;
 import com.test.fasoo.steps.AuthSteps;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,6 +56,32 @@ public class AuthUserMapperTest {
         assertNotNull(result);
         assertEquals(result,authIdDtoList);
     }
+    //권한 생성시 사용되는 메서드
+    @DisplayName("맵퍼_getAuthUser테스트")
+    @Test
+    public void 맵퍼_getAuthUser(){
+        CheckAuthRequest checkAuthRequest = new CheckAuthRequest("pjys211","DATA_USE","DATA_200000");
+
+        Long id = 5L;
+        String authTypeId = "DATA_USE";
+        String requestId = "REQUEST_1000000";
+        String userId = "pjys211";
+        String resourceId = "DATA_200000";
+        LocalDate beginDate = LocalDate.of(2023,06,28);
+        LocalDate expireDate = LocalDate.of(2023,07,30);
+        LocalDate createDate = LocalDate.of(2023,06,28);
+        LocalDate updateDate = LocalDate.of(2023,06,29);
+
+        AuthInfoDto expectedAuthInfo = new AuthInfoDto(id,authTypeId,requestId,userId,resourceId,beginDate,expireDate,createDate,updateDate);
+
+        AuthInfoDto result = authUserMapper.getAuthUser(checkAuthRequest);
+
+        assertNotNull(result);
+        assertEquals(result, expectedAuthInfo);
+
+    }
+    
+    //권한 조회시 사용되는 메서드
 
 
 }

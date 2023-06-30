@@ -9,11 +9,11 @@ import java.util.List;
 public class AuthSteps {
     public static List<AuthIdDto> 권한생성응답_생성() {
         AuthIdDto authIdDto1 = new AuthIdDto();
-        authIdDto1.setResourceId("data1");
+        authIdDto1.setResourceId("DATA1");
         authIdDto1.setAuthUserId("1");
 
         AuthIdDto authIdDto2 = new AuthIdDto();
-        authIdDto2.setResourceId("data2");
+        authIdDto2.setResourceId("DATA2");
         authIdDto2.setAuthUserId("2");
 
         List<AuthIdDto> list = new ArrayList<>();
@@ -25,10 +25,10 @@ public class AuthSteps {
 
     public static AuthInfoDto 권한조회응답_생성(){
         Long id = 1L;
-        String authTypeId = "Data_use";
-        String requestId = "request1";
+        String authTypeId = "DATA_USE";
+        String requestId = "REQUEST_1";
         String userId = "pjys211";
-        String resourceId = "data1";
+        String resourceId = "DATA_1";
         LocalDate beginDate = LocalDate.of(2023,06,30);
         LocalDate expireDate = LocalDate.of(2023,07,30);
         LocalDate createTime = LocalDate.of(2023,06,30);
@@ -39,12 +39,12 @@ public class AuthSteps {
 
 
     public static AuthUserRequest 권한생성요청_생성() {
-        String authTypeId = "Data_use";
+        String authTypeId = "DATA_USE";
         String userId = "pjys211";
-        String requestId = "request1";
+        String requestId = "REQUEST_1";
         List<String> resourceIdList = new ArrayList<>();
-        resourceIdList.add("data1");
-        resourceIdList.add("data2");
+        resourceIdList.add("DATA_1");
+        resourceIdList.add("DATA_1");
         LocalDate beginDate = LocalDate.of(2023,06,30);
         LocalDate expireDate = LocalDate.of(2023,07,30);
 
@@ -53,8 +53,8 @@ public class AuthSteps {
 
     public static CheckAuthRequest 권한조회요청_생성() {
         String userId = "pjys211";
-        String authTypeName = "Data_use";
-        String resourceId = "data1";
+        String authTypeName = "DATA_USE";
+        String resourceId = "DATA_1";
 
         return new CheckAuthRequest(userId,authTypeName,resourceId);
     }

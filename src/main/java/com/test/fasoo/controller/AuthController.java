@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
@@ -30,9 +31,9 @@ public class AuthController {
     //유저 권한 조회
     @GetMapping
     public ResponseEntity<AuthInfoDto> getAuthUser(
-            @RequestParam String userId,
-            @RequestParam String authTypeId,
-            @RequestParam String resourceId){
+            @RequestParam @NotBlank String userId,
+            @RequestParam @NotBlank String authTypeId,
+            @RequestParam @NotBlank String resourceId){
 
         CheckAuthRequest checkAuthRequest = new CheckAuthRequest(userId, authTypeId, resourceId);
         return ResponseEntity.ok().body(authUserService.getAuthUser(checkAuthRequest));
