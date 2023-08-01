@@ -41,10 +41,10 @@ public class AuthSteps {
     public static AuthUserRequest 권한생성요청_생성() {
         String authTypeId = "DATA_USE";
         String userId = "pjys211";
-        String requestId = "REQUEST_1";
+        String requestId = "REQUEST1";
         List<String> resourceIdList = new ArrayList<>();
-        resourceIdList.add("DATA_1");
-        resourceIdList.add("DATA_1");
+        resourceIdList.add("DATA1");
+        resourceIdList.add("DATA2");
         LocalDate beginDate = LocalDate.of(2023,06,30);
         LocalDate expireDate = LocalDate.of(2023,07,30);
 

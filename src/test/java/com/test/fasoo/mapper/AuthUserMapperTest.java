@@ -45,13 +45,18 @@ public class AuthUserMapperTest {
     @Test
     public void 맵퍼_getAuthByRequestId(){
 
-        AuthIdDto authIdDto1 = new AuthIdDto("5","DATA_200000");
-        AuthIdDto authIdDto2 = new AuthIdDto("6","DATA_200001");
+        AuthIdDto authIdDto1 = new AuthIdDto("9","DATA0");
+        AuthIdDto authIdDto2 = new AuthIdDto("10","DATA1");
+        AuthIdDto authIdDto3 = new AuthIdDto("11","DATA2");
+        AuthIdDto authIdDto4 = new AuthIdDto("12","DATA3");
         List<AuthIdDto> authIdDtoList = new ArrayList<>();
         authIdDtoList.add(authIdDto1);
         authIdDtoList.add(authIdDto2);
+        authIdDtoList.add(authIdDto3);
+        authIdDtoList.add(authIdDto4);
 
-        List<AuthIdDto> result = authUserMapper.getAuthByRequestId("REQUEST_1000000");
+
+        List<AuthIdDto> result = authUserMapper.getAuthByRequestId("REQUEST0");
 
         assertNotNull(result);
         assertEquals(result,authIdDtoList);
@@ -60,22 +65,22 @@ public class AuthUserMapperTest {
     @DisplayName("맵퍼_getAuthUser테스트")
     @Test
     public void 맵퍼_getAuthUser(){
-        CheckAuthRequest checkAuthRequest = new CheckAuthRequest("pjys211","DATA_USE","DATA_200000");
+        CheckAuthRequest checkAuthRequest = new CheckAuthRequest("pjys211","DATA_USE","DATA0");
 
-        Long id = 5L;
+        Long id = 9L;
         String authTypeId = "DATA_USE";
-        String requestId = "REQUEST_1000000";
+        String requestId = "REQUEST0";
         String userId = "pjys211";
-        String resourceId = "DATA_200000";
-        LocalDate beginDate = LocalDate.of(2023,06,28);
-        LocalDate expireDate = LocalDate.of(2023,07,30);
-        LocalDate createDate = LocalDate.of(2023,06,28);
-        LocalDate updateDate = LocalDate.of(2023,06,29);
+        String resourceId = "DATA0";
+        LocalDate beginDate = LocalDate.of(2023,8,30);
+        LocalDate expireDate = LocalDate.of(2023,9,30);
+        LocalDate createDate = LocalDate.of(2023,8,1);
+        LocalDate updateDate = LocalDate.of(2023,8,1);
 
         AuthInfoDto expectedAuthInfo = new AuthInfoDto(id,authTypeId,requestId,userId,resourceId,beginDate,expireDate,createDate,updateDate);
 
         AuthInfoDto result = authUserMapper.getAuthUser(checkAuthRequest);
-
+        System.out.println(result);
         assertNotNull(result);
         assertEquals(result, expectedAuthInfo);
 

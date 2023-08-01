@@ -25,7 +25,7 @@ public class AuthInfoDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expireDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate createTime;
+    private LocalDate createDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate updateTime;
+    private LocalDate updateDate;
 }
