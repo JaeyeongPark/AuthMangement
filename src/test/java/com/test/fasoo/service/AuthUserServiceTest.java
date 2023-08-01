@@ -82,8 +82,8 @@ public class AuthUserServiceTest {
         assertEquals(result.getResourceId(),expectedResult.getResourceId());
         assertEquals(result.getBeginDate(),expectedResult.getBeginDate());
         assertEquals(result.getExpireDate(),expectedResult.getExpireDate());
-        assertEquals(result.getCreateTime(),expectedResult.getCreateTime());
-        assertEquals(result.getUpdateTime(),expectedResult.getUpdateTime());
+        assertEquals(result.getCreateDate(),expectedResult.getCreateDate());
+        assertEquals(result.getUpdateDate(),expectedResult.getUpdateDate());
 
     }
 
