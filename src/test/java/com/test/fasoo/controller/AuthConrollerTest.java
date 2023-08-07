@@ -44,7 +44,6 @@ public class AuthConrollerTest {
 
 //        AuthIdListResponse authIdListDto = AuthSteps.권한생성응답_생성();
 
-
         String jsonRequest = objectMapper.writeValueAsString(authUserRequest);
 //        String jsonResponse = objectMapper.writeValueAsString(authIdListDto);
 
@@ -53,7 +52,7 @@ public class AuthConrollerTest {
                     MockMvcRequestBuilders.post("/auth")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk()).andDo(print());
 //              .andExpect(MockMvcResultMatchers.content().json(jsonResponse,false);
     }
 

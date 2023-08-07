@@ -38,7 +38,6 @@ public class AuthUserServiceTest {
         //        Mock데이터
         AuthUserRequest mockAuthUserRequest = AuthSteps.권한생성요청_생성();
 
-
         //Mapper에서는 List로 반환 서비스에서는 AuthIdListResponse로 변환해서 반환
         List<AuthIdDto> mockAuthIdListResponse = AuthSteps.권한생성응답_생성();
 
@@ -56,7 +55,6 @@ public class AuthUserServiceTest {
         //then
         assertNotNull(result);
         assertEquals(result.getAuthIdDtoList(), expectedResult.getAuthIdDtoList());
-
 
     }
 
@@ -84,8 +82,8 @@ public class AuthUserServiceTest {
         assertEquals(result.getResourceId(),expectedResult.getResourceId());
         assertEquals(result.getBeginDate(),expectedResult.getBeginDate());
         assertEquals(result.getExpireDate(),expectedResult.getExpireDate());
-        assertEquals(result.getCreateTime(),expectedResult.getCreateTime());
-        assertEquals(result.getUpdateTime(),expectedResult.getUpdateTime());
+        assertEquals(result.getCreateDate(),expectedResult.getCreateDate());
+        assertEquals(result.getUpdateDate(),expectedResult.getUpdateDate());
 
     }
 
